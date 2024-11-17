@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Now?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f8ff;
+      color: #333;
+    }
+
+    h1 {
+      margin-top: 50px;
+      font-size: 3rem;
+    }
+
+    .current-task {
+      margin-top: 20px;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>What Now?</h1>
+  <p class="current-task" id="current-task"></p>
+
+  <script>
+    // 定义每天的时间表
+    const schedule = [
+      { start: 6, end: 8, task: "起床并吃早餐" },
+      { start: 8, end: 12, task: "工作或学习" },
+      { start: 12, end: 13, task: "吃午饭并短暂休息" },
+      { start: 13, end: 17, task: "工作或学习" },
+      { start: 17, end: 19, task: "运动或放松" },
+      { start: 19, end: 21, task: "吃晚饭并享受家庭时光" },
+      { start: 21, end: 23, task: "休息、阅读或娱乐" },
+      { start: 23, end: 6, task: "睡觉" },
+    ];
+
+    // 获取当前时间
+    const now = new Date();
+    const currentHour = now.getHours();
+
+    // 根据当前时间确定活动
+    const currentTask = schedule.find(item =>
+      currentHour >= item.start && currentHour < item.end ||
+      (item.start > item.end && (currentHour >= item.start || currentHour < item.end))
+    );
+
+    // 显示当前活动
+    document.getElementById('current-task').textContent = currentTask
+      ? `现在该做什么：${currentTask.task}`
+      : "暂无活动计划";
+  </script>
+</body>
+
+</html>
